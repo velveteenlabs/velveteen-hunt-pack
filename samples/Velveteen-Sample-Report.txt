@@ -1,0 +1,8 @@
+==============================
+VELVETEEN SAMPLE REPORT
+==============================
+Flagged Findings:
+- Suspicious process from AppData
+
+SHA256: SAMPLEHASH123
+==============================

@@ -1,0 +1,2 @@
+# Changelog
+Initial structure created.
