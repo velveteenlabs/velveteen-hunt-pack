@@ -1,1 +1,29 @@
-SHA256 + custody footer
+=========================================
+EVIDENCE + CHAIN OF CUSTODY
+=========================================
+
+This report is part of a structured, read-only investigation.
+
+Guidelines:
+
+- Do NOT delete or modify files during initial analysis
+- Preserve all generated reports
+- Record analyst actions, timestamps, and system context
+- Capture file hashes before any remediation
+- Keep original file paths and metadata intact when possible
+- Maintain separation between raw findings and analyst interpretation
+
+Report Handling:
+
+- Store all reports in a single directory
+- Do not overwrite previous outputs
+- Consider archiving reports after investigation
+- Retain reports for comparison across multiple runs
+
+Important:
+
+- Findings in this report are not proof of compromise
+- Correlation across multiple reports increases confidence
+- Final conclusions should be based on combined evidence
+
+=========================================
