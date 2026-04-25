@@ -1,1 +1,38 @@
-Standard script header template
+=========================================
+VELVETEEN HUNT PACK — SCRIPT HEADER
+=========================================
+
+SCRIPT:
+[Script Name]
+
+PHASE:
+[Hunt / Analysis / Follow-Up]
+
+PURPOSE:
+Explain what this script is designed to do in 1–2 sentences.
+
+WHAT THIS SCRIPT DOES:
+- Describe key actions (data collection, parsing, analysis)
+- Describe what it reviews (processes, files, network, persistence, etc.)
+- Describe what it outputs (structured report, priority buckets)
+
+WHAT TO LOOK FOR:
+- List the most important signals this script helps identify
+- Focus on behavior, not just indicators
+- Highlight anything commonly abused (paths, processes, commands)
+
+HOW TO INTERPRET RESULTS:
+- Explain how findings should be evaluated
+- Reinforce that single indicators are not proof
+- Encourage correlation across other reports
+
+IMPORTANT:
+This script is READ-ONLY.
+
+It does NOT:
+- Kill processes
+- Delete files
+- Quarantine artifacts
+- Upload data externally
+
+=========================================
