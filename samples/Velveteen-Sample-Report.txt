@@ -1,8 +1,229 @@
-==============================
-VELVETEEN SAMPLE REPORT
-==============================
-Flagged Findings:
-- Suspicious process from AppData
+=========================================
+VELVETEEN HUNT PACK — SAMPLE REPORT
+=========================================
 
-SHA256: SAMPLEHASH123
-==============================
+PHASE:
+Demonstration Output (Curated Example)
+
+PURPOSE:
+This sample report demonstrates the Velveteen Hunt Pack output structure, priority model,
+and correlation-based analysis style.
+
+NOTE:
+This is a curated example designed to show how findings are presented and interpreted.
+It does not represent a real system.
+
+=========================================
+
+
+=========================================
+HIGH PRIORITY FINDINGS
+=========================================
+
+[1] Suspicious process + network + path correlation: powershell.exe
+
+Why it matters:
+PowerShell is executing with an encoded command, running from a user-writable directory,
+and maintaining an outbound connection. This combination strongly suggests scripted execution behavior.
+
+Evidence:
+- Process: powershell.exe
+- Command Line: powershell.exe -EncodedCommand SQBFAFgA...
+- Path: C:\Users\Analyst\AppData\Local\Temp\update.ps1
+- Network: 45.77.12.34:443 (ESTABLISHED)
+- Source Reports: LiveProcess, Network, Artifact
+
+Recommended follow-up:
+Run Velveteen-FollowUp-ProcessTrace.ps1 and Velveteen-FollowUp-FileTrace.ps1
+
+
+[2] Persistence referencing user-writable executable
+
+Why it matters:
+A registry Run key references an executable located in AppData. Persistence combined with a
+user-writable path is a strong indicator of potential unauthorized startup behavior.
+
+Evidence:
+- Registry: HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+- Value: updater
+- Path: C:\Users\Analyst\AppData\Roaming\helper.exe
+- Source Reports: Persistence, Artifact
+
+Recommended follow-up:
+Run Velveteen-FollowUp-FileTrace.ps1 on helper.exe
+
+
+[3] Repeated remote endpoint across multiple reports
+
+Why it matters:
+The same remote IP appears in multiple reports and is associated with a script-capable process.
+Repetition across phases suggests consistent outbound communication.
+
+Evidence:
+- Remote IP: 45.77.12.34
+- Seen in: Network, Correlation
+- Associated Process: powershell.exe
+
+Recommended follow-up:
+Review Velveteen-Hunt-Network.ps1 and correlate with ProcessTrace output
+
+
+=========================================
+MEDIUM PRIORITY FINDINGS
+=========================================
+
+[1] Suspicious file in Temp directory
+
+Why it matters:
+Executable located in a common staging directory. Alone, this may be benign, but it becomes more
+concerning if tied to execution or persistence.
+
+Evidence:
+- File: update.ps1
+- Path: C:\Users\Analyst\AppData\Local\Temp\update.ps1
+- Last Modified: Recent
+- Source Reports: Artifact
+
+Recommended follow-up:
+Run Velveteen-FollowUp-FileTrace.ps1
+
+
+[2] Unusual scheduled task name
+
+Why it matters:
+Scheduled tasks with generic or deceptive names may indicate persistence, especially if tied
+to user-writable paths.
+
+Evidence:
+- Task Name: SystemUpdater
+- Action: powershell.exe -File update.ps1
+- Source Reports: Persistence
+
+Recommended follow-up:
+Review task action and associated file
+
+
+[3] Script interpreter observed without clear context
+
+Why it matters:
+Script interpreters are frequently used in both legitimate and malicious contexts. Requires correlation.
+
+Evidence:
+- Process: wscript.exe
+- Path: C:\Windows\System32\wscript.exe
+- Source Reports: LiveProcess
+
+Recommended follow-up:
+Check parent process and command line using ProcessTrace
+
+
+=========================================
+LOW CONTEXT FINDINGS
+=========================================
+
+[1] Single external IP connection
+
+Why it matters:
+Single remote connection without supporting context is not sufficient to indicate malicious activity.
+
+Evidence:
+- Remote IP: 104.21.72.12
+- Source Reports: Network
+
+Recommended follow-up:
+Retain for correlation if repeated
+
+
+[2] Recently modified file in Downloads
+
+Why it matters:
+Downloads directory activity is common. Requires additional context before being considered suspicious.
+
+Evidence:
+- File: installer.exe
+- Path: C:\Users\Analyst\Downloads\installer.exe
+- Source Reports: Artifact
+
+Recommended follow-up:
+Check if user-initiated
+
+
+[3] Standard system service
+
+Why it matters:
+Common Windows service observed. Retained for baseline reference.
+
+Evidence:
+- Service: Windows Update
+- Path: C:\Windows\System32\svchost.exe
+- Source Reports: Persistence
+
+Recommended follow-up:
+None
+
+
+=========================================
+ANALYST NOTES
+=========================================
+
+This sample demonstrates how multiple weak signals form a stronger pattern.
+
+Observed pattern:
+
+powershell.exe
+→ executing encoded command
+→ running script from Temp
+→ connecting to external IP
+→ referenced by persistence mechanism
+
+This forms a possible chain:
+
+Process → File → Network → Persistence
+
+No single element proves compromise, but the combination increases confidence.
+
+Focus should be on:
+
+- Repeated indicators
+- Suspicious execution paths
+- Command-line behavior
+- Persistence references
+- Network relationships
+
+Correlation is key to distinguishing noise from meaningful activity.
+
+
+=========================================
+FOLLOW-UP RECOMMENDATIONS
+=========================================
+
+For process investigation:
+Velveteen-FollowUp-ProcessTrace.ps1
+
+For file/path investigation:
+Velveteen-FollowUp-FileTrace.ps1
+
+For pattern validation:
+Velveteen-Hunt-Correlation.ps1
+
+If findings persist:
+Rerun hunt scripts and compare results over time
+
+
+=========================================
+EVIDENCE + CHAIN OF CUSTODY
+=========================================
+
+- Do not delete or modify files during initial investigation
+- Preserve report output
+- Record timestamps and analyst actions
+- Capture file hashes before remediation
+- Keep all reports together for correlation
+- Treat this report as an analysis layer, not raw evidence
+
+=========================================
+
+Generated:
+Sample Output
+
+=========================================
