@@ -1,1 +1,111 @@
-Standard report format
+=========================================
+VELVETEEN HUNT PACK — REPORT
+=========================================
+
+PHASE:
+[Hunt / Analysis / Follow-Up]
+
+SCRIPT:
+[Script Name]
+
+PURPOSE:
+Brief description of what this report represents.
+
+=========================================
+
+
+=========================================
+HIGH PRIORITY FINDINGS
+=========================================
+
+Strong indicators or correlated patterns suggesting meaningful risk.
+
+[Finding Title]
+
+Why it matters:
+Explain why this is important.
+
+Evidence:
+- Include key data points (process, path, command, IP, etc.)
+- Keep structured and readable
+
+Recommended follow-up:
+What script or action should be taken next
+
+
+=========================================
+MEDIUM PRIORITY FINDINGS
+=========================================
+
+Suspicious signals that require correlation or validation.
+
+[Finding Title]
+
+Why it matters:
+Explain why this deserves attention.
+
+Evidence:
+- Key details
+
+Recommended follow-up:
+Next step if needed
+
+
+=========================================
+LOW CONTEXT FINDINGS
+=========================================
+
+Single observations retained for reference.
+
+[Finding Title]
+
+Why it matters:
+Explain why it is low concern alone.
+
+Evidence:
+- Key details
+
+Recommended follow-up:
+Usually none unless repeated
+
+
+=========================================
+ANALYST NOTES
+=========================================
+
+Use this section to explain:
+
+- What patterns are emerging
+- Whether findings connect across phases
+- What stands out most
+- What still needs validation
+
+Encourage thinking in chains:
+
+Process → File → Network → Persistence → Correlation
+
+
+=========================================
+FOLLOW-UP RECOMMENDATIONS
+=========================================
+
+List next steps clearly:
+
+- Run ProcessTrace for suspicious processes
+- Run FileTrace for suspicious files
+- Rerun hunt scripts if needed
+- Use correlation to validate patterns
+
+
+=========================================
+EVIDENCE + CHAIN OF CUSTODY
+=========================================
+
+- Do not delete or modify files during investigation
+- Preserve report output and timestamps
+- Record who ran scripts and when
+- Capture hashes before remediation
+- Keep reports together for correlation
+- Treat this as analysis, not raw evidence
+
+=========================================
